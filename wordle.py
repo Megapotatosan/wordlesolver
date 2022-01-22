@@ -3,8 +3,7 @@ from pathlib import Path
 from collections import Counter
 from itertools import chain
 import operator
-
-DICT = "/usr/share/dict/american-english"
+from english_words import english_words_set
 
 ALLOWABLE_CHARACTERS = set(string.ascii_letters)
 ALLOWED_ATTEMPTS = 6
@@ -12,7 +11,7 @@ WORD_LENGTH = 5
 
 WORDS = {
   word.lower()
-  for word in Path(DICT).read_text().splitlines()
+  for word in english_words_set
   if len(word) == WORD_LENGTH and set(word) < ALLOWABLE_CHARACTERS
 }
 LETTER_COUNTER = Counter(chain.from_iterable(WORDS))
